@@ -10,7 +10,7 @@
 #################################################################################################################################
 
 #SOLUTION
-#Total Score: 49903
+#Total Score: 49801
 #################################################################################################################################
 
 def read_input(f_path):
@@ -21,7 +21,7 @@ def read_input(f_path):
 
     with open(f_path, 'r') as file:
     #This opens the file specified by f_path in read mode "r" and
-    #At the sametime it ensures that the file is properly closed after its suit finishes, even if an exception is raised during the execution.
+    #at the sametime it ensures that the file is properly closed after its suit finishes.
 
         for line in file:
         # It iterates over each line in the opened file.
@@ -37,37 +37,30 @@ def read_input(f_path):
     return game_rounds #Returns the list of tuples containing the shape and outcome for each round.
 
 def calculate_score(game_rounds):
-#Defines a function named calculate_score that takes a single argument game_rounds, which is a list of tuples containing sign and condition data,
-#in order to calculate the total score based on the game_rounds played. 
-
-    
-    
-    
+#Defines a function named calculate_score that takes a single argument game_rounds, which is a list of tuples containing 
+#sign and condition data, in order to calculate the total score based on the game_rounds played. 
+    scoring_rule = {
+    ("A", "X"): 3,
+    ("A", "Y"): 4,          #
+    ("A", "Z"): 8,
+    ("B", "X"): 1,
+    ("B", "Y"): 5,
+    ("B", "Z"): 9,
+    ("C", "X"): 2,
+    ("C", "Y"): 6,
+    ("C", "Z"): 7
+    }
+    # The dictionary above maps the score for the different combination.
     score = 0
-    #Initializes a variable score to keep track of the total score.
+    #Initializes a variable score to keep track of the total score
 
+     
     for sign, condition in game_rounds:
-    #Iterates over each tuple (shape, outcome) in the rounds list.
-
-        if sign == "A":
-            sign_score = 1
-        elif sign == "B":
-            sign_score = 2         
-        elif sign == "C":
-            sign_score = 3
-                                   #Inside the loop, it assigns scores based on the sign and conditions values. 
-                                   #The sign scores are assigned based on the sign letters A, B, and C, 
-                                   #while condition scores are assigned based on the condition letters X, Y, and Z.
-                                   #These scores are then added to the score variable.
-        if condition == "X":
-            condition_score = 0
-        elif condition == "Y":
-            condition_score = 3
-        elif condition == "Z":
-            condition_score = 6
-
-        score += sign_score + condition_score
-
+        # Calculate total score for all rounds using for loop to iterate
+        sign_score = scoring_rule.get((sign, condition), 0)
+        # Get the score for the current combination from the mapping
+        score += sign_score      
+        # Add the score to the total up.
     return score #Returns the total score calculated based on the rounds played.
 
 
